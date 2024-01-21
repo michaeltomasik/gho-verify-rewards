@@ -1,5 +1,5 @@
 import { ethers } from 'ethers';
-import ghoTokenABI from './ghoTokenABI.json'; // Import the ABI for the GHO token
+import ghoTokenABI from './ghoTokenAbi.json'; // Import the ABI for the GHO token
 import { unstable_noStore as noStore } from 'next/cache'
 
 const ghoTokenAddress = '0xc4bF5CbDaBE595361438F8c6a187bDc330539c60'; // Replace with the actual contract address
