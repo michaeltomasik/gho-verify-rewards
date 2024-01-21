@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import Image from 'next/image'
 
-import { useNetwork, useAccount } from 'wagmi';
+import { useNetwork, useAccount, sepolia } from 'wagmi';
 import AccountInfo from './AccountInfo'
 import Spinner from './Spinner'
 import { transferGhoTokens } from '../utils'
@@ -35,6 +35,7 @@ function KYCForm() {
         e.preventDefault();
         localStorage.setItem('kycData', JSON.stringify(formData));
         setIsLoading(true)
+        // VERIFY DATA WITH AI 3rd party servie
         const result = await transferGhoTokens(address, FIXED_PRIZE_MONEY);
 
         setIsLoading(false)
