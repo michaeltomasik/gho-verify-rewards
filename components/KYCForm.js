@@ -167,7 +167,7 @@ function KYCForm() {
                     <label style={labelStyle}>First Name:</label>
                     <input 
                         type="text" 
-                        name="First Name" 
+                        name="firstName" 
                         value={formData.firstName} 
                         onChange={handleChange} 
                         style={inputStyle}
@@ -177,7 +177,7 @@ function KYCForm() {
                     <label style={labelStyle}>Last Name:</label>
                     <input 
                         type="text" 
-                        name="last" 
+                        name="lastName" 
                         value={formData.lastName} 
                         onChange={handleChange} 
                         style={inputStyle}
