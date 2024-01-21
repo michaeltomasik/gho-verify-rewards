@@ -22,20 +22,12 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <ConnectButton />
-
         <div className="App">
-          <h1>KYC Form</h1>
           {/* <AccountInfo /> */}
           <KYCForm />
         </div>
       </main>
 
-      <footer className={styles.footer}>
-        <a href="https://rainbow.me" rel="noopener noreferrer" target="_blank">
-          Made with ❤️ by your frens at 🌈
-        </a>
-      </footer>
     </div>
   );
 };
