@@ -5,6 +5,7 @@ import Image from 'next/image'
 
 import { useNetwork, useAccount } from 'wagmi';
 import AccountInfo from './AccountInfo'
+import Spinner from './Spinner'
 import { transferGhoTokens } from '../utils'
 import logo from '../styles/logo.svg'
 
@@ -119,29 +120,29 @@ function KYCForm() {
         alignItems: 'center',
         gap: '20px'
     };
-    const spinnerStyle = {
-        border: '16px solid #f3f3f3', // Light grey background
-        borderTop: '16px solid #29f0fc', // Blue color
-        borderRadius: '50%',
-        width: '120px',
-        height: '120px',
-        animation: 'spin 2s linear infinite'
-      };
+    // const spinnerStyle = {
+    //     border: '16px solid #f3f3f3', // Light grey background
+    //     borderTop: '16px solid #29f0fc', // Blue color
+    //     borderRadius: '50%',
+    //     width: '120px',
+    //     height: '120px',
+    //     animation: 'spin 2s linear infinite'
+    //   };
       
-      // Add keyframes for the spin animation to your CSS
-      const styleSheet = document.styleSheets[0];
-      styleSheet.insertRule(`
-        @keyframes spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-      `, styleSheet.cssRules.length);
+    //   // Add keyframes for the spin animation to your CSS
+    //   const styleSheet = document.styleSheets[0];
+    //   styleSheet.insertRule(`
+    //     @keyframes spin {
+    //       0% { transform: rotate(0deg); }
+    //       100% { transform: rotate(360deg); }
+    //     }
+    //   `, styleSheet.cssRules.length);
 
     if (isLoading) {
         return         <div style={loadingContainerStyle}>
             <h1>Verification Process...</h1>
             <h5>Please wait...</h5>
-        <div style={spinnerStyle}></div>
+        <Spinner />
         </div>
     }
     if (success) {
