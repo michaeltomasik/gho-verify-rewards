@@ -22,7 +22,9 @@ export const transferGhoTokens = async (toAddress, amount) => {
       await tx.wait();
 
       console.log('Transfer successful:', tx);
+      return true
   } catch (error) {
       console.error('Transfer failed:', error);
+      return false
   }
 }

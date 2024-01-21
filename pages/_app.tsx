@@ -8,6 +8,12 @@ import {
 } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
 require('dotenv').config()
+import { Kulim_Park } from 'next/font/google'
+
+const kulimPark = Kulim_Park({
+  weight: ['300', '400', '600'],
+  subsets: ['latin']
+})
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [
@@ -33,7 +39,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <WagmiConfig config={wagmiConfig}>
       <RainbowKitProvider chains={chains}>
-        <Component {...pageProps} />
+        <Component {...pageProps} className={kulimPark.className} />
       </RainbowKitProvider>
     </WagmiConfig>
   );

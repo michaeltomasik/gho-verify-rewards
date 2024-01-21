@@ -4,7 +4,7 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import Image from 'next/image'
 
 import { useNetwork, useAccount } from 'wagmi';
-
+import AccountInfo from './AccountInfo'
 import { transferGhoTokens } from '../utils'
 import logo from '../styles/logo.svg'
 
@@ -12,6 +12,8 @@ import logo from '../styles/logo.svg'
 function KYCForm() {
     const { chain } = useNetwork();
     const { address } = useAccount()
+    const [isLoading, setIsLoading] = useState(false)
+    const [success, setSuccess] = useState(false)
     const FIXED_PRIZE_MONEY = 1
 
     const [formData, setFormData] = useState({
@@ -28,13 +30,18 @@ function KYCForm() {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         localStorage.setItem('kycData', JSON.stringify(formData));
+        setIsLoading(true)
+        const result = await transferGhoTokens(address, FIXED_PRIZE_MONEY);
 
-        transferGhoTokens(address, FIXED_PRIZE_MONEY);
-
-        alert('KYC Data Saved!');
+        setIsLoading(false)
+        if (result) {
+            setSuccess(true)
+        } else {
+            alert('ERROR')
+        }
     };
 
     const formStyle = {
@@ -48,7 +55,25 @@ function KYCForm() {
         boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
         backgroundColor: '#2c2c2c',
         height: '591px',
-        width: '415px'
+        width: '415px',
+        color: 'white'
+    };
+
+    const loadingContainerStyle = {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        maxWidth: '500px',
+        margin: 'auto',
+        padding: '20px',
+        borderRadius: '8px',
+        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+        backgroundColor: '#2c2c2c',
+        height: '415px',
+        width: '415px',
+        color: 'white'
     };
 
     const inputGroupStyle = {
@@ -94,7 +119,37 @@ function KYCForm() {
         alignItems: 'center',
         gap: '20px'
     };
+    const spinnerStyle = {
+        border: '16px solid #f3f3f3', // Light grey background
+        borderTop: '16px solid #29f0fc', // Blue color
+        borderRadius: '50%',
+        width: '120px',
+        height: '120px',
+        animation: 'spin 2s linear infinite'
+      };
+      
+      // Add keyframes for the spin animation to your CSS
+      const styleSheet = document.styleSheets[0];
+      styleSheet.insertRule(`
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      `, styleSheet.cssRules.length);
 
+    if (isLoading) {
+        return         <div style={loadingContainerStyle}>
+            <h1>Verification Process...</h1>
+            <h5>Please wait...</h5>
+        <div style={spinnerStyle}></div>
+        </div>
+    }
+    if (success) {
+        return         <div style={loadingContainerStyle}>
+            <h1>Verification Completed</h1>
+            <AccountInfo />
+        </div>
+    }
     return (
         <form onSubmit={handleSubmit} style={formStyle}>
             <div style={connectStyle} >

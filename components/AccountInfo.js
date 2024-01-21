@@ -14,8 +14,8 @@ const AccountInfo = () => {
 
   return (
     <div>
-      <div>Account: {address}</div>
-      <div>Balance: {balanceData ? balanceData?.data?.formatted : 'Loading...'} GHO</div>
+      {/* <div>Account: {address}</div> */}
+      <div>Account Balance: {balanceData ? balanceData?.data?.formatted : 'Loading...'} GHO</div>
     </div>
   );
 }
